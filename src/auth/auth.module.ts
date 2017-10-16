@@ -2,6 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
+// third-party modules
+import { AngularFireModule, FirebaseAppConfig } from 'angularfire2'
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+// shared modules
+import { SharedModule } from './shared/shared.module';
+
 export const ROUTES: Routes = [
   {
     path: 'auth',
@@ -13,10 +21,23 @@ export const ROUTES: Routes = [
   }
 ]
 
+export const firebaseConfig: FirebaseAppConfig = {
+  apiKey: "AIzaSyA8jnxZV3AW8dtXRpYzvLqFmQrMSihmIfY",
+  authDomain: "fitness-app-5f397.firebaseapp.com",
+  databaseURL: "https://fitness-app-5f397.firebaseio.com",
+  projectId: "fitness-app-5f397",
+  storageBucket: "fitness-app-5f397.appspot.com",
+  messagingSenderId: "971962184255"
+};
+
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(ROUTES)
+    RouterModule.forChild(ROUTES),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    SharedModule.forRoot()
   ]
 })
 export class AuthModule {}
